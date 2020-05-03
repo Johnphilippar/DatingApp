@@ -1,23 +1,18 @@
-﻿using DatingApp.API.Model;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
-using SQLitePCL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System;
 using System.Threading.Tasks;
+using DatingApp.API.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace DatingApp.API.Data
 {
     public class AuthRepository : IAuthRepository
     {
         private readonly DataContext _context;
-
         public AuthRepository(DataContext context)
         {
             _context = context;
         }
+
         public async Task<User> Login(string username, string password)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == username);
@@ -25,8 +20,8 @@ namespace DatingApp.API.Data
             if (user == null)
                 return null;
 
-            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt)) ;
-            return null;
+            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+                return null;
 
             return user;
         }
@@ -38,21 +33,23 @@ namespace DatingApp.API.Data
                 var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
                 for (int i = 0; i < computedHash.Length; i++)
                 {
-                    if(computedHash[i] != passwordHash[i]) return false;
+                    if (computedHash[i] != passwordHash[i]) return false;
                 }
-            return true;
             }
+            return true;
         }
 
         public async Task<User> Register(User user, string password)
         {
             byte[] passwordHash, passwordSalt;
             CreatePasswordHash(password, out passwordHash, out passwordSalt);
+
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
 
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
+
             return user;
         }
 
