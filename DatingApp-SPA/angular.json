@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "DatingApp-SPA": {
+    "DatingApp-Spa": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/DatingApp-SPA",
+            "outputPath": "dist/DatingApp-Spa",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -66,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "DatingApp-SPA:build"
+            "browserTarget": "DatingApp-Spa:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "DatingApp-SPA:build:production"
+              "browserTarget": "DatingApp-Spa:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "DatingApp-SPA:build"
+            "browserTarget": "DatingApp-Spa:build"
           }
         },
         "test": {
@@ -114,19 +114,19 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "DatingApp-SPA:serve"
+            "devServerTarget": "DatingApp-Spa:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "DatingApp-SPA:serve:production"
+              "devServerTarget": "DatingApp-Spa:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "DatingApp-SPA",
+  "defaultProject": "DatingApp-Spa",
   "cli": {
-    "analytics": "754442e9-961c-4184-8603-4e04e2fb5bcf"
+    "analytics": "d3b3ee00-d92a-42da-ae04-9ab2a7cd6b4e"
   }
 }
